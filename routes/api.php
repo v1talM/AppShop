@@ -18,5 +18,5 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix'=>'user','namespace'=>'Auth'],function (){
     Route::get('register','RegisterController@create');
-    Route::post('login','LoginController@login');
+    Route::get('login','LoginController@login');
 });
