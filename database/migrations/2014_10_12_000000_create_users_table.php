@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->comment('昵称');
             $table->string('email')->unique()->comment('登录邮箱');
             $table->string('password');
-            $table->string('avatar')->default('')->comment('用户头像');
+            $table->string('avatar')->default('avatar.jpg')->comment('用户头像');
             $table->integer('score')->default('0')->comment('积分');
             $table->integer('total_score')->default('0')->comment('积分总计');
             $table->enum('level',['1','2','3','4','5'])->default('1')->comment('会员等级');
