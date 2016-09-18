@@ -20,7 +20,7 @@ class OAuthController extends Controller
         ];
         //获取api认证
         try {
-            $response = $http->post('http://shop.dev/oauth/token',[
+            $response = $http->post('http://shop.v1tal.xyz/oauth/token',[
                 'form_params' =>[
                     'grant_type' => 'password',
                     'client_id' => 7,
