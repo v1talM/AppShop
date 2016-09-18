@@ -20,3 +20,8 @@ Route::get('/user', function (Request $request) {
         'message' => '获取用户信息成功'
     ]);
 })->middleware('auth:api');
+
+Route::group(['prefix' => 'api', 'namespace' => 'Auth'], function (){
+    Route::get('register','RegisterController@create');
+    Route::get('login','LoginController@login');
+});
