@@ -13,10 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-
-
-
-Route::group(['prefix'=>'user','namespace'=>'Auth'],function (){
-    Route::get('register','RegisterController@create');
-    Route::get('login','LoginController@login');
-});
+Route::get('/user', function (Request $request) {
+    return response()->json([
+        'status' => 200,
+        'info' => auth()->user(),
+        'message' => '获取用户信息成功'
+    ]);
+})->middleware('auth:api');
