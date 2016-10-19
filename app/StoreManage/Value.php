@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Value extends Model
 {
+    protected $table = "shop_values";
     protected $fillable = [
         'property_id',
         'value',

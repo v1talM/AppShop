@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateValuesTable extends Migration
+class CreateShopValuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateValuesTable extends Migration
      */
     public function up()
     {
-        Schema::create('values', function (Blueprint $table) {
+        Schema::create('shop_values', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('property_id')->unsigned()->comment('对应属性ID');
             $table->string('value')->nullable()->comment('属性值');
@@ -32,6 +32,6 @@ class CreateValuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('values');
+        Schema::dropIfExists('shop_values');
     }
 }
