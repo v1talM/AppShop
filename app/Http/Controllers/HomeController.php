@@ -36,6 +36,6 @@ class HomeController extends Controller
     {
         $categories = $this->homeRepository->getCategory()->toArray();
         $category_list = $this->homeRepository->getCategoryList($categories);
-        return response()->header('Access-Control-Allow-Origin','*')->json(['status' => 200, 'data' => $category_list]);
+        return response()->json(['status' => 200, 'data' => $category_list])->header('Access-Control-Allow-Origin','*');
     }
 }
