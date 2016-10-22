@@ -36,7 +36,6 @@ class HomeApiRepository
             ->take(3)
             ->get();
         $return = $this->getReturnArray($goods);
-
         return $return;
     }
 
@@ -69,8 +68,7 @@ class HomeApiRepository
             $return[$key]['goods_id'] = $v->id;
             $return[$key]['goods_thumb'] = $v->goods_thumb;
             $return[$key]['goods_name'] = $v->name;
-            $return[$key]['goods_property'] = $this->getGoodsPrice($v->values);
-        }
+            $return[$key]['goods_property'] = $this->getGoodsPrice($v->values);         	}
         return $return;
     }
 
