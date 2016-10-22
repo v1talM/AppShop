@@ -112,13 +112,10 @@ class HomeApiRepository
     {
         $sub_category = $this->factory->category
             ->where('parent_id','=',$parent_id)
-            ->select('name')
+            ->select('id','name')
             ->get()
             ->toArray();
-        $return = [];
-        foreach ($sub_category as $value){
-            array_push($return,$value['name']);
-        }
+        $return = $sub_category;
         return $return;
     }
 }
