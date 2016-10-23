@@ -19,14 +19,9 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/auth/callback','OAuthController@oauth');
 Route::group(['prefix' => 'app'], function (){
-<<<<<<< HEAD
     Route::get('home','HomeController@index');
     Route::get('category','HomeController@category');
     Route::get('goods/{id}','HomeController@getGoodsInfoById')->where('id','[0-9]+');
-=======
-   Route::get('home','HomeController@index');
-   Route::get('category','HomeController@category');
->>>>>>> 4445e0ae96017c09617a9611176bae9ca25fe0ee
 });
 /**后台管理**/
 Route::group(['prefix' => 'shop' , 'namespace' => 'ShopManage'],  function (){

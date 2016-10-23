@@ -34,7 +34,7 @@ class HomeApiRepository
                 ->where('created_at','>=',Carbon::now()->subWeek())
                 ->take(3)
                 ->get();
-        $return = $this->getReturnArray($goods)
+        $return = $this->getReturnArray($goods);
         return $return;
     }
 
