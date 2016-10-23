@@ -47,9 +47,24 @@ class HomeController extends Controller
         return response()->json(['status' => 200, 'data' => $category_list])->header('Access-Control-Allow-Origin','*');
     }
 
+    /**
+     * 根据商品id获取该商品详细信息
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getGoodsInfoById($id)
     {
         $goods = $this->homeRepository->getGoodsInfoById($id);
         return response()->json(['status' => 200,'data' => $goods]);
+    }
+
+    /**
+     * 根据分类ID获取该分类下所有商品信息
+     * @param $id
+     */
+    public function getCategoryGoods($id)
+    {
+        $goods = $this->homeRepository->getGoodsInfoByCategoryId($id);
+        return response()->json(['status' => 200, 'data' => $goods]);
     }
 }

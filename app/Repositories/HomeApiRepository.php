@@ -119,6 +119,12 @@ class HomeApiRepository
         return $return;
     }
 
+
+    /**
+     * 根据分类父级ID获取该分类下所有子集分类信息
+     * @param $parent_id
+     * @return mixed
+     */
     public function getCategoriesByParentId($parent_id)
     {
         $sub_category = $this->factory->category
@@ -131,6 +137,11 @@ class HomeApiRepository
     }
 
 
+    /**
+     * 根据商品ID获取该商品所有信息
+     * @param $id
+     * @return array
+     */
     public function getGoodsInfoById($id)
     {
         $goods = $this->factory->goods
@@ -141,6 +152,11 @@ class HomeApiRepository
         return $return;
     }
 
+    /**
+     * 返回商品详细信息数组，用于商品详情页面请求
+     * @param $goods
+     * @return array
+     */
     public function getGoodsDetailReturnArray($goods)
     {
         $return = [];
@@ -154,5 +170,22 @@ class HomeApiRepository
         return $return;
     }
 
+
+    /**
+     * 根据分类ID获取该分类下所有商品信息
+     * @param $id
+     * @return array
+     */
+    public function getGoodsInfoByCategoryId($id)
+    {
+        $goods = $this->factory->goods
+            ->where('category_id','=',$id)
+            ->with('property')
+            ->orderBy('created_at','desc')
+            ->take(10)
+            ->get();
+        $return = $this->getReturnArray($goods);
+        return $return;
+    }
 }
 
