@@ -20,6 +20,10 @@ class HomeController extends Controller
         $this->homeRepository = $homeRepository;
     }
 
+    /**
+     * 获取app首页商品信息
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index()
     {
         $qg_goods = $this->homeRepository->getHomepageThreeGoods();
@@ -32,10 +36,20 @@ class HomeController extends Controller
         ]]);
     }
 
+    /**
+     * 获取app分类菜单列表
+     * @return $this
+     */
     public function category()
     {
         $categories = $this->homeRepository->getCategory()->toArray();
         $category_list = $this->homeRepository->getCategoryList($categories);
         return response()->json(['status' => 200, 'data' => $category_list])->header('Access-Control-Allow-Origin','*');
+    }
+
+    public function getGoodsInfoById($id)
+    {
+        $goods = $this->homeRepository->getGoodsInfoById($id);
+        return response()->json(['status' => 200,'data' => $goods]);
     }
 }

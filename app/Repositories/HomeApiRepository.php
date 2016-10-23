@@ -62,6 +62,12 @@ class HomeApiRepository
         return $return;
     }
 
+
+    /**
+     * 返回商品 id,缩略图,名称,属性,简述。用于展示商品列表信息
+     * @param $goods
+     * @return array
+     */
     public function getReturnArray($goods)
     {
         $return = [];
@@ -71,10 +77,16 @@ class HomeApiRepository
             $return[$key]['goods_name'] = $v->name;
             $return[$key]['goods_property'] = $this->getGoodsPrice($v->values);
             $return[$key]['goods_brief'] = $v->goods_brief;
+
         }
         return $return;
     }
 
+    /**
+     * 获取商品价格以及属性值并返回
+     * @param Collection $value
+     * @return mixed
+     */
     public function getGoodsPrice(Collection $value)
     {
         $return = [];
@@ -83,7 +95,7 @@ class HomeApiRepository
             $return[$key]['price'] = $v->price;
         }
         //随机返回一个套餐的价格
-        return $return[array_rand($return)];
+        return $return;
     }
 
     //获取数据库中商品分类
@@ -117,6 +129,29 @@ class HomeApiRepository
             ->get()
             ->toArray();
         $return = $sub_category;
+        return $return;
+    }
+
+    public function getGoodsInfoById($id)
+    {
+        $goods = $this->factory->goods
+            ->where('id','=',$id)
+            ->with('values')
+            ->get();
+        $return = $this->getGoodsDetailReturnArray($goods);
+        return $return;
+    }
+
+    public function getGoodsDetailReturnArray($goods)
+    {
+        $return = [];
+        foreach ($goods as $key => $v){
+            $return[$key]['goods_id'] = $v->id;
+            $return[$key]['goods_thumb'] = $v->goods_thumb;
+            $return[$key]['goods_name'] = $v->name;
+            $return[$key]['goods_property'] = $this->getGoodsPrice($v->values);
+            $return[$key]['goods_desc'] = $v->goods_brief;
+        }
         return $return;
     }
 }

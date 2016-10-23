@@ -21,6 +21,7 @@ Route::get('/auth/callback','OAuthController@oauth');
 Route::group(['prefix' => 'app'], function (){
     Route::get('home','HomeController@index');
     Route::get('category','HomeController@category');
+    Route::get('goods/{id}','HomeController@getGoodsInfoById')->where('id','[0-9]+');
 });
 /**后台管理**/
 Route::group(['prefix' => 'shop' , 'namespace' => 'ShopManage'],  function (){
