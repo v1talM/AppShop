@@ -36,7 +36,6 @@ class HomeApiRepository
             ->take(3)
             ->get();
         $return = $this->getReturnArray($goods);
-
         return $return;
     }
 
@@ -131,6 +130,7 @@ class HomeApiRepository
         $return = $sub_category;
         return $return;
     }
+<<<<<<< HEAD
 
     public function getGoodsInfoById($id)
     {
@@ -155,3 +155,6 @@ class HomeApiRepository
         return $return;
     }
 }
+=======
+}
+>>>>>>> 4445e0ae96017c09617a9611176bae9ca25fe0ee
