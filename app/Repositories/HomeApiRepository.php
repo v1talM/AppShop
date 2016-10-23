@@ -70,6 +70,7 @@ class HomeApiRepository
             $return[$key]['goods_thumb'] = $v->goods_thumb;
             $return[$key]['goods_name'] = $v->name;
             $return[$key]['goods_property'] = $this->getGoodsPrice($v->values);
+            $return[$key]['goods_brief'] = $v->goods_brief;
         }
         return $return;
     }
