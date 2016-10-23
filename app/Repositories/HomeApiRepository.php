@@ -27,15 +27,14 @@ class HomeApiRepository
         $this->factory = $factory;
     }
 
-    public function getHomepageThreeGoods()
-    {
+    public function getHomepageThreeGoods(){
         $goods = $this->factory->goods
-            ->with('property')
-            ->where('is_new','=','1')
-            ->where('created_at','>=',Carbon::now()->subWeek())
-            ->take(3)
-            ->get();
-        $return = $this->getReturnArray($goods);
+                ->with('property')
+                ->where('is_new','=','1')
+                ->where('created_at','>=',Carbon::now()->subWeek())
+                ->take(3)
+                ->get();
+        $return = $this->getReturnArray($goods)
         return $return;
     }
 
@@ -130,7 +129,7 @@ class HomeApiRepository
         $return = $sub_category;
         return $return;
     }
-<<<<<<< HEAD
+
 
     public function getGoodsInfoById($id)
     {
@@ -154,7 +153,6 @@ class HomeApiRepository
         }
         return $return;
     }
+
 }
-=======
-}
->>>>>>> 4445e0ae96017c09617a9611176bae9ca25fe0ee
+
