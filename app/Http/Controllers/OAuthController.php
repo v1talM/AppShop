@@ -28,8 +28,8 @@ class OAuthController extends Controller
         $response = $this->http->post('http://119.29.5.221/oauth/token', [
             'form_params' => [
                 'grant_type' => 'password',
-                'client_id' => '',
-                'client_secret' => '',
+                'client_id' => 9,
+                'client_secret' => 'W1GsIEpXqRbYn2ZrcT8hsQt0rCYFhR8lwPagR5Uf',
                 'username' => $request->input('username'),
                 'password' => $request->input('password'),
                 'scope' => '',
