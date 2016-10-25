@@ -37,7 +37,7 @@ class OAuthController extends Controller
         ]);
         //return json_decode((string) $response->getBody(), true);
         $accessToken =  Arr::get(json_decode((string) $response->getBody(), true),'access_token');
-        return $this->getUserByToken($accessToken);
+        return response()->json(['status' => 200 , 'accessToken' => $accessToken]);
 
     }
 
