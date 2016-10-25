@@ -34,9 +34,9 @@ class IndexController extends Controller
 
     public function category()
     {
-        $category = $this->repository->getCategory()->toArray();
-
-        return response()->json(['data' => $category]);
+        $category = $this->repository->getCategory();
+        $category_list = $this->repository->getCategoryList($category);
+        return response()->json(['data' => $category_list]);
     }
 
 
