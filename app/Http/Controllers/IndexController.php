@@ -39,5 +39,17 @@ class IndexController extends Controller
         return response()->json(['data' => $category_list]);
     }
 
+    public function getGoodsInfoById($id)
+    {
+        $goods = $this->repository->getGoodsInfoById($id);
+        return response()->json(['status' => 200, 'data' => $goods]);
+    }
+
+    public function getCategoryGoods($id)
+    {
+        $goods = $this->repository->getGoodsInfoByCategoryId($id);
+        return response()->json(['status' => 200, 'data' => $goods]);
+    }
+
 
 }
