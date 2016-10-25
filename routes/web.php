@@ -17,7 +17,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/auth/callback','OAuthController@oauth');
+Route::get('/oauth/callback','OAuthController@oauth');
+
 Route::group(['prefix' => 'app'], function (){
     //获取首页数据信息
     Route::get('home','IndexController@home');

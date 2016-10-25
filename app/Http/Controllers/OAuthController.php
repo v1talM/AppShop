@@ -11,49 +11,42 @@ use Illuminate\Support\Facades\Auth;
 
 class OAuthController extends Controller
 {
-    public function oauth(Request $request)
+    protected $http;
+
+    /**
+     * OAuthController constructor.
+     * @param $http
+     */
+    public function __construct(Client $http)
     {
-        $http = new Client();
-        $user = [
-            'email' => $request->input('username'),
-            'password' => $request->input('password')
-        ];
-        //获取api认证
-        try {
-            $response = $http->post('http://shop.dev/oauth/token',[
-                'form_params' =>[
-                    'grant_type' => 'password',
-                    'client_id' => 7,
-                    'client_secret' => 'ApEySDWQV8r2HTPNSj7EfJ8Ov04FEGywbIpdnHhf',
-                    'username' => $user['email'],
-                    'password' => $user['password'],
-                    'scope' => '*'
-                ]
-            ]);
-        }catch (\Exception $e){
-            return response()->json([
-                'token' => '',
-                'status' => 403,
-                'message' => '用户名和密码不匹配'
-            ]);
-        }
-
-        if (! Auth::attempt(['email' => $user['email'], 'password' => $user['password']], true)) {
-            //账号密码不匹配
-            return response()->json([
-                'token' => '',
-                'status' => 403,
-                'message' => '用户名和密码不匹配'
-            ]);
-        }
-
-        $access_token =  Arr::get(json_decode((string) $response->getBody(),true),'access_token');
-        return response()->json([
-            'token' => $access_token,
-            'user' => auth()->user(),
-            'message' => '登录成功',
-            'status' => 200
-        ]);
+        $this->http = $http;
     }
 
+
+    public function oauth(Request $request)
+    {
+        $response = $this->http->post('http://119.29.5.221/oauth/token', [
+            'form_params' => [
+                'grant_type' => 'password',
+                'client_id' => '',
+                'client_secret' => '',
+                'username' => $request->input('username'),
+                'password' => $request->input('password'),
+                'scope' => '',
+            ],
+        ]);
+        //return json_decode((string) $response->getBody(), true);
+        $accessToken =  Arr::get(json_decode((string) $response->getBody(), true),'access_token');
+        return $this->getUserByToken($accessToken);
+
+    }
+
+    private function getUserByToken($accessToken)
+    {
+        $headers = ['Authorization' => 'Bearer '.$accessToken];
+        $request = new \GuzzleHttp\Psr7\Request('GET','http://119.29.5.221/api/user',$headers);
+        $response = $this->http->send($request);
+
+        return json_decode((string) $response->getBody(), true);
+    }
 }
