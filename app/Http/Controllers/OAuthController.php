@@ -29,6 +29,9 @@ class OAuthController extends Controller
             'form_params' => [
                 'grant_type' => 'password',
                 'client_id' => 9,
+                //本地
+                //'client_secret' => 'uNnM7S2dk7Et1Fhbld8t0pkTJNucH85qxUlQK2s3',
+                //服务器上
                 'client_secret' => 'W1GsIEpXqRbYn2ZrcT8hsQt0rCYFhR8lwPagR5Uf',
                 'username' => $request->input('username'),
                 'password' => $request->input('password'),
@@ -41,12 +44,8 @@ class OAuthController extends Controller
 
     }
 
-    private function getUserByToken($accessToken)
+    public function getUserByToken(Request $request)
     {
-        $headers = ['Authorization' => 'Bearer '.$accessToken];
-        $request = new \GuzzleHttp\Psr7\Request('GET','http://119.29.5.221/api/user',$headers);
-        $response = $this->http->send($request);
-
-        return json_decode((string) $response->getBody(), true);
+        return json_decode((string) $request->user(), true);
     }
 }

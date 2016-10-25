@@ -13,9 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+Route::get('/user', 'OAuthController@getUserByToken')->middleware('auth:api');
 
 Route::group(['prefix' => 'user', 'namespace' => 'Auth'], function (){
     Route::get('register','RegisterController@create');
