@@ -20,13 +20,13 @@ Auth::routes();
 Route::get('/auth/callback','OAuthController@oauth');
 Route::group(['prefix' => 'app'], function (){
     //获取首页数据信息
-    Route::get('home','HomeController@index');
+    Route::get('home','IndexController@home');
     //获取所有分类列表信息
-    Route::get('category','HomeController@category');
+    Route::get('category','IndexController@category');
     //根据商品id获取详细信息
-    Route::get('goods/{id}','HomeController@getGoodsInfoById')->where('id','[0-9]+');
+    Route::get('goods/{id}','IndexController@getGoodsInfoById')->where('id','[0-9]+');
     //根据分类id获取该分类下所有商品信息
-    Route::get('category/{id}/goods','HomeController@getCategoryGoods')->where('id','[0-9]+');
+    Route::get('category/{id}/goods','IndexController@getCategoryGoods')->where('id','[0-9]+');
 });
 /**后台管理**/
 Route::group(['prefix' => 'shop' , 'namespace' => 'ShopManage'],  function (){
