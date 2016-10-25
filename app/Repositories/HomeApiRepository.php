@@ -119,7 +119,6 @@ class HomeApiRepository
         return $return;
     }
 
-
     /**
      * 根据分类父级ID获取该分类下所有子集分类信息
      * @param $parent_id
@@ -135,7 +134,6 @@ class HomeApiRepository
         $return = $sub_category;
         return $return;
     }
-
 
     /**
      * 根据商品ID获取该商品所有信息
@@ -169,7 +167,6 @@ class HomeApiRepository
         }
         return $return;
     }
-
 
     /**
      * 根据分类ID获取该分类下所有商品信息

@@ -13,12 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return response()->json([
-        'status' => 200,
-        'info' => auth()->user(),
-        'message' => '获取用户信息成功'
-    ]);
+Route::get('/user', function () {
+    return response()->json(['message'=>'获取成功']);
 })->middleware('auth:api');
 
 Route::group(['prefix' => 'user', 'namespace' => 'Auth'], function (){

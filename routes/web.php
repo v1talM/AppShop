@@ -58,8 +58,9 @@ Route::group(['prefix' => 'shop' , 'namespace' => 'ShopManage'],  function (){
 
 //测试用
 Route::get('/test',function (){
-   $good = \App\StoreManage\Goods::find(2);
-   $types = $good->types()->get()->toArray();
-   $prop = new \App\StoreManage\Type($types);
-    dd($prop->with('properties')->get());
+
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
