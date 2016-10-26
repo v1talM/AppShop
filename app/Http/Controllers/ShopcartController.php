@@ -4,21 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Repositories\ShopcartRepository;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use Illuminate\Support\Facades\Redis;
 
 class ShopcartController extends Controller
 {
     protected $repository;
-    protected $redis;
     /**
      * ShopcartController constructor.
      * @param $repository
      */
-    public function __construct(ShopcartRepository $repository, \Redis $redis)
+    public function __construct(ShopcartRepository $repository)
     {
         $this->repository = $repository;
-        $this->redis = $redis;
     }
 
 
@@ -32,7 +30,7 @@ class ShopcartController extends Controller
         try{
             $result = $this->repository->addGoods($input);
             //购物车商品存入redis
-            $this->redis->lpush($input['user_id'],$result);
+            Redis::lpush($input['user_id'],$result);
         }catch (\Exception $e){
             return response()->json(['status' => 500, 'message' => '添加购物车失败']);
         }
