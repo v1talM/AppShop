@@ -40,7 +40,7 @@ class ShopcartRepository
     {
         $return = [
             'goods_name' => $goods->name,
-            'goods_brief' => $goods->brief,
+            'goods_brief' => $goods->goods_brief,
             'goods_thumb' => $goods->goods_thumb,
             'give_integral' => $goods->give_integral,
             'goods_price' => $this->getGoodsPrice($goods->values)
@@ -59,7 +59,8 @@ class ShopcartRepository
     public function addGoods($input)
     {
         $goods_info = $this->getGoodsInfoById($input['goods_id']);
-        return $goods_info;
+        $goods_info['goods_number'] = $input['goods_number'];
+        return json_encode($goods_info);
     }
 
 }

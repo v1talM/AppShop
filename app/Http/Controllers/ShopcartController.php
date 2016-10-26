@@ -32,15 +32,20 @@ class ShopcartController extends Controller
             //购物车商品存入redis
             Redis::lpush($input['user_id'],$result);
         }catch (\Exception $e){
-            return response()->json(['status' => 500, 'message' => '添加购物车失败']);
+            return response()->json(['status' => 500, 'message' => '添加到购物车失败']);
         }
         return response()->json(['status' => 200, 'message' => '添加购物车成功']);
     }
 
     public function getShopcartByUserId(Request $request)
     {
-        $user_id = $request->input('user_id');
-        $shopcart_goods = Redis::lrange($user_id,0,-1);
-        return response()->json(['status' => 200, 'data' => $shopcart_goods]);
+        try{
+            $user_id = $request->input('user_id');
+            $shopcart_goods = Redis::lrange($user_id,0,-1);
+        }catch (\Exception $e){
+            return response()->json(['status' => 500, 'data'=>[],'message' => '获取数据失败']);
+        }
+
+        return response()->json(['status' => 200, 'data' => $shopcart_goods , 'message' => '获取数据成功']);
     }
 }
