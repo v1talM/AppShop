@@ -59,7 +59,7 @@ class ShopcartRepository
     public function addGoods($input)
     {
         $goods_info = $this->getGoodsInfoById($input['goods_id']);
-        return response()->json(['data' => $goods_info]);
+        return $goods_info;
     }
 
 }
