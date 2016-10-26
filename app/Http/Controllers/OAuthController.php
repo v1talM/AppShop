@@ -27,17 +27,17 @@ class OAuthController extends Controller
     {
 
         try {
-            $response = $this->http->post('http://119.29.5.221/oauth/token', [
+            $response = $this->http->post('http://shop.dev/oauth/token', [
                 'form_params' => [
                     'grant_type' => 'password',
                     'client_id' => 9,
                     //本地
-                    //'client_secret' => 'uNnM7S2dk7Et1Fhbld8t0pkTJNucH85qxUlQK2s3',
+                    'client_secret' => 'uNnM7S2dk7Et1Fhbld8t0pkTJNucH85qxUlQK2s3',
                     //服务器上
-                    'client_secret' => 'W1GsIEpXqRbYn2ZrcT8hsQt0rCYFhR8lwPagR5Uf',
+                    //'client_secret' => 'W1GsIEpXqRbYn2ZrcT8hsQt0rCYFhR8lwPagR5Uf',
                     'username' => $request->input('username'),
                     'password' => $request->input('password'),
-                    'scope' => '',
+                    'scope' => '*',
                 ],
             ]);
         }catch (\Exception $e){

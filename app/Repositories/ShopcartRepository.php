@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 
 use App\Factories\ShopManageFactory;
+use Illuminate\Support\Collection;
 
 class ShopcartRepository
 {
@@ -29,10 +30,33 @@ class ShopcartRepository
         $goods = $this->factory->goods
             ->whereId($id)
             ->with('property')
-            ->get();
+            ->first();
+
+        $goods = $this->getShopcartReturnArray($goods);
         return $goods;
     }
 
+    private function getShopcartReturnArray($goods)
+    {
+        $return = [
+            'goods_name' => $goods->name,
+            'goods_brief' => $goods->brief,
+            'goods_thumb' => $goods->goods_thumb,
+            'give_integral' => $goods->give_integral,
+            'goods_price' => $this->getGoodsPrice($goods->values)
+        ];
+        return $return;
+    }
+
+    private function getGoodsPrice(Collection $value)
+    {
+        $return = [];
+        foreach ($value as $key => $v){
+            $return = $v->price;
+        }
+        //随机返回一个套餐的价格
+        return $return;
+    }
     public function addGoods($input)
     {
         $goods_info = $this->getGoodsInfoById($input['goods_id']);

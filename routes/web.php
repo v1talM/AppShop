@@ -64,3 +64,7 @@ Route::get('/test',function (){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('test',function (){
+    $name = Redis::lrange('1',0,-1);
+    dd($name);
+});
