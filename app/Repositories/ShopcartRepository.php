@@ -54,7 +54,6 @@ class ShopcartRepository
         foreach ($value as $key => $v){
             $return = $v->price;
         }
-        //随机返回一个套餐的价格
         return $return;
     }
     public function addGoods($input)

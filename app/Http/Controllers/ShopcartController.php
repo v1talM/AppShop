@@ -36,4 +36,11 @@ class ShopcartController extends Controller
         }
         return response()->json(['status' => 200, 'message' => '添加购物车成功']);
     }
+
+    public function getShopcartByUserId(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        $shopcart_goods = Redis::lrange($user_id,0,-1);
+        return response()->json(['status' => 200, 'data' => $shopcart_goods]);
+    }
 }

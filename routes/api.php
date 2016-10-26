@@ -14,7 +14,12 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/user', 'OAuthController@getUserByToken')->middleware('auth:api');
-Route::get('/shopcart/create','ShopcartController@create')->middleware('auth:api');
+Route::group(['prefix' => '/shopcart', 'middleware' => 'auth:api'],function (){
+    Route::get('/create','ShopcartController@create');
+    Route::get('/show','ShopcartController@getShopcartByUserId');
+});
+
+
 Route::group(['prefix' => 'user', 'namespace' => 'Auth'], function (){
     Route::get('register','RegisterController@create');
     Route::get('login','LoginController@login');
