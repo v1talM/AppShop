@@ -52,6 +52,6 @@ class ShopcartController extends Controller
         }catch (\Exception $e){
             return response()->json(['status' => 500, 'data'=>[],'message' => '获取数据失败']);
         }
-        return response()->json(['status' => 200, 'data' => $shopcart_goods , 'message' => '获取数据成功']);
+        return response()->json(['status' => 200, 'data' => $return , 'message' => '获取数据成功']);
     }
 }
