@@ -30,7 +30,9 @@ class ShopcartController extends Controller
         try{
             $result = $this->repository->addGoods($input);
             //购物车商品存入redis
-            Redis::lpush($input['user_id'],$result);
+
+            $this->repository->saveToRedis($result,$input['user_id']);
+
         }catch (\Exception $e){
             return response()->json(['status' => 500, 'message' => '添加到购物车失败']);
         }
@@ -39,13 +41,18 @@ class ShopcartController extends Controller
 
     public function getShopcartByUserId(Request $request)
     {
+        $return = [];
         try{
             $user_id = $request->input('user_id');
             $shopcart_goods = Redis::lrange($user_id,0,-1);
+            foreach ($shopcart_goods as $key => $val){
+                $return[$key]=json_decode($val);
+            }
+
         }catch (\Exception $e){
             return response()->json(['status' => 500, 'data'=>[],'message' => '获取数据失败']);
         }
-
+        dd($return);
         return response()->json(['status' => 200, 'data' => $shopcart_goods , 'message' => '获取数据成功']);
     }
 }
