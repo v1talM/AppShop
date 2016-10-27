@@ -20,6 +20,7 @@ Route::group(['prefix' => '/shopcart', 'middleware' => 'auth:api'],function (){
 });
 Route::group(['prefix' => '/address', 'middleare' => 'auth:api'],function (){
     Route::get('/show','AddressController@getAddressByUserId');
+    Route::get('/select','AddressController@setAddressByUserId');
 });
 
 

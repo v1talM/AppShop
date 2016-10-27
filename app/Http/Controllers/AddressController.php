@@ -31,4 +31,8 @@ class AddressController extends Controller
         return response()->json(['status' => 200 , 'data' => $address , 'message' => '获取收货地址成功']);
     }
 
+    public function setAddressByUserId(Request $request)
+    {
+        return response()->json(['status' => 200 , 'message' => '设置收货地址成功']);
+    }
 }
