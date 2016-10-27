@@ -34,5 +34,6 @@ class ShopManageFactory
         $this->goods = $goods;
         $this->property = $property;
         $this->shopcart = $shopcart;
+        $this->address = $address;
     }
 }

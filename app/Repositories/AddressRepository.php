@@ -20,8 +20,7 @@ class AddressRepository
 
     public function getAddressByUserId($id)
     {
-        $id = 1;
-        $address = $this->factory->address->whereId($id)->get()->toArray();
+        $address = $this->factory->address->whereId(1)->get()->toArray();
         return $address;
     }
 }
