@@ -175,8 +175,14 @@ class HomeApiRepository
      */
     public function getGoodsInfoByCategoryId($id)
     {
+        $cate_id = $this->factory->category
+            ->where('parent_id','=',$id)
+            ->orWhere('id','=',$id)
+            ->select('id')
+            ->get()
+            ->toArray();
         $goods = $this->factory->goods
-            ->where('category_id','=',$id)
+            ->whereIn('category_id',$cate_id)
             ->with('property')
             ->orderBy('created_at','desc')
             ->take(10)
