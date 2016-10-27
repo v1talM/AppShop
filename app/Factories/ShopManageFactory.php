@@ -9,6 +9,7 @@
 namespace App\Factories;
 
 
+use App\Address;
 use App\Shopcart;
 use App\StoreManage\Category;
 use App\StoreManage\Goods;
@@ -20,14 +21,14 @@ class ShopManageFactory
     public $goods;
     public $property;
     public $shopcart;
-
+    public $address;
     /**
      * ShopManageFactory constructor.
      * @param $category
      * @param $goods
      * @param $property
      */
-    public function __construct(Category $category, Goods $goods, Property $property, Shopcart $shopcart)
+    public function __construct(Category $category, Goods $goods, Property $property, Shopcart $shopcart, Address $address)
     {
         $this->category = $category;
         $this->goods = $goods;
