@@ -65,7 +65,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('test',function (){
-    //Redis::flushall();
+    Redis::flushall();
     $name = Redis::lrange('1',0,-1);
     dd($name);
 });
