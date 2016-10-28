@@ -12,15 +12,15 @@
 
 ## 安装 installation
 - - -
-`composer install`
+项目根目录下执行命令 `composer install`
 
 ### 配置数据库 databases
 - - -
-`php artisan migrate`
+项目根目录下执行命令 `php artisan migrate`
 
 ### 填充必要数据 migration
 - - -
-`php artisan db:seed`
+项目根目录下执行命令 `php artisan db:seed`
 
 > 执行该命令后会在数据库填充商品分类、默认管理员、测试收货地址
 
