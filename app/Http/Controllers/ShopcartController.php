@@ -23,7 +23,7 @@ class ShopcartController extends Controller
     public function create(Request $request)
     {
         $input = [
-            'user_id' => $request->input('user_id'),
+            'user_id' => $request->user()->id,
             'goods_id' => $request->input('goods_id'),
             'goods_number' => $request->input('goods_number'),
         ];
@@ -41,9 +41,9 @@ class ShopcartController extends Controller
 
     public function getShopcartByUserId(Request $request)
     {
+        $user_id = $request->user()->id;
         $return = [];
         try{
-            $user_id = $request->input('user_id');
             $shopcart_goods = Redis::lrange($user_id,0,-1);
             foreach ($shopcart_goods as $key => $val){
                 $return[$key]=json_decode($val);
